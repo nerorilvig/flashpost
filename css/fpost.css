@@ -69,12 +69,19 @@ body{
 .navbtn-wrapper{
   width:100%;
 }
+.nav-btns{
+  width:100%;
+  float:left;
+}
 .nav-btn{
   display:inline-block;
-  float:left;
-  height:100px;
-  width:25%;
-  background-color:green;
+  height:50px;
+  width:20%;
+  margin:0;
+}
+.nav-btn>a{
+  width:100%;
+  height:100%;
 }
 .nav-contents{
   height:50px;
