@@ -1,53 +1,77 @@
 @media screen and (min-width:0px) and (max-width:630px){
-  .navbtn-wrapper{
-    display:inline-block;
+  *{
+    box-sizing: border-box;
+  }
+  .disableInMobile{
+    display:none;
   }
   .container-main{
     width:100%;
-    margin-top:110px;
+    margin:0 auto;
   }
   .nav-contents{
     width:100%;
   }
-  #user-info{
-    display:none;
+  .branks{
+    height:110px;
   }
   #navtop{
+    padding:0;
     height:100px;
   }
 }
 @media screen and (min-width:630px) and (max-width:992px){
-  .navbtn-wrapper{
-    display:inline-block;
+  *{
+    box-sizing:border-box;
+  }
+  .disableInTablet{
+    display:none;
+  }
+  .logout-menu{
   }
   .container-main{
     max-width:720px;
-    margin-top:110px;
+    margin:0 auto;
+  }
+  .branks{
+    height:110px;
   }
   .nav-contents{
+    width:100%;
+    max-width:720px;
+    margin:0 auto;
   }
   #memo-list{
     max-width:720px;
   }
-  #user-info{
-    display:none;
-  }
   #navtop{
     height:100px;
   }
+  #nav-pc{
+    display:none;
+    height:0px;
+  }
 }
 @media screen and (min-width:992px){
-  .navbtn-wrapper{
+  .disableInPC{
+    display:none;
+  }
+  .logout-menu{
+    display:none;
+  }
+  #nav-mobile{
     display:none;
   }
   .container-main{
     max-width:992px;
     margin:0 auto;
-    margin-top:60px;
   }
   .nav-contents{
     width:992px;
     margin:0 auto;
+  }
+  .branks{
+    height:60px;
   }
   #memo-list{
     max-width:720px;
@@ -62,29 +86,57 @@
   #navtop{
     height:50px;
   }
+  #nav-pc{
+    display:flex;
+  }
 }
 body{
   background-color:lightgrey;
 }
-.navbtn-wrapper{
-  width:100%;
+.navbar{
+  padding:0;
+}
+.logout-menu{
+  height:50px;
+  width:25%;
+  margin:0;
 }
 .nav-btns{
+  margin:0;
+  list-style:none;
+  display:flex;
+  padding:0;
   width:100%;
   float:left;
+  left:0;
 }
 .nav-btn{
-  display:inline-block;
   height:50px;
-  width:20%;
+  width:25%;
   margin:0;
+  margin:0;
+}
+.nav-btn-pc{
+  width:20%; 
+  height:50px;
+}
+.nav-search-pc{
+  width:40%;
+}
+.logout-menu-pc{
+  width:20%;
 }
 .nav-btn>a{
   width:100%;
   height:100%;
 }
+.nav-btn-pc>a{
+  width:100%;
+  height:100%;
+}
 .nav-contents{
-  height:50px;
+  height:100%;
+  padding:0;
 }
 .container-main{
   height:auto;

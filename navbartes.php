@@ -1,8 +1,8 @@
 <?php 
   //テスト用データをここに記述。DB設計は後回し
   ini_set('display_errors','ON');
-  $state=$_GET['state'];
-  if($state==""){
+  $state = $_GET['state'];
+  if($state!="Home" && $state!="PublicList" && $state!= "Search" && $state!="UserInfo"){
     $state="Home";
   }
 ?>
@@ -23,24 +23,33 @@
   <!-- モバイルファースト設定-->
 </head>
 <body>
+  <?php 
+    //選択された項目のみbtn-primary、それ以外にはbtn-outline-primaryを適用
+    function isSelected($state,$str){
+      if($state==$str){
+        return "btn-primary";
+      }else{
+        return "btn-outline-primary";
+      }
+    }
+  ?>
   <nav class="navbar fixed-top navbar-expand-lg" id="navtop" >
     <div class="nav-contents">
       <ul class="nav-btns">
         <li class="nav-btn" id="navbtn1">
-          <a href="?state=Home" class="btn btn-primary">Home</a>
+          <a href='?state=Home' class="btn <?php echo isSelected($state,"Home");?>">Home</a>
         </li>
         <li class="nav-btn" id="navbtn2">
-          <a href="?state=PublicList" class="btn btn-outline-primary">PublicList</a>
+          <a href='?state=PublicList' class="btn <?php echo isSelected($state,"PublicList");?>">PublicList</a>
         </li>
         <li class="nav-btn" id="navbtn3">
-          <a href="?state=Search" class="btn btn-outline-primary">Search</a>
+          <a href="?state=Search" class="btn <?php echo isSelected($state,"Search");?>">Search</a>
         </li>
         <li class="nav-btn" id="navbtn4">
-          <a href="?state=UserInfo" class="btn btn-outline-primary">UserInfo</a>
+          <a href="?state=UserInfo" class="btn <?php echo isSelected($state,"UserInfo");?>">UserInfo</a>
         </li>
       </ul>
     </div>
   </nav>
-  <p><?php echo $state; ?></p>
 </body>
 </html>
