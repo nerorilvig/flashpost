@@ -31,7 +31,7 @@
 </head>
 <body>
   <nav class="navbar fixed-top navbar-expand-lg" id="navtop" >
-    <div class="nav-contents diableInMobile disableInTablet">
+    <div class="nav-contents disableInMobile disableInTablet">
       <ul class="nav-btns">
         <li class="nav-btn-pc">
           <a href='?state=Home' class="btn <?php echo isSelected($state,"Home");?>">Home</a>
@@ -55,6 +55,14 @@
       </ul>
     </div>
     <div class="nav-contents disableInPC">
+      <div class="input-group disableInPC <?php if($state!="Search"){echo "disableInMobile disableInTablet";}?>" style="float:left;margin-top:5px;margin-left:10px;width:80%;">
+        <input type="text" class="form-control" placeholder="メモ・デッキ・タグ検索">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-primary" onclick="location.href='?state=Search'">
+            <i class="fas fa-search text-light;"></i><span class="disableInMobile">検索</span>
+          </button>
+        </span>
+      </div>
       <a href="#" style="float:right;" class="logout-menu btn btn-outline-secondary disableInPC">logout</a>
       <ul class="nav-btns disableInPC" id="nav-mobile">
         <li class="nav-btn" id="navbtn1">

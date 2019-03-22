@@ -27,8 +27,6 @@
   .disableInTablet{
     display:none;
   }
-  .logout-menu{
-  }
   .container-main{
     max-width:720px;
     margin:0 auto;
@@ -54,9 +52,6 @@
 }
 @media screen and (min-width:992px){
   .disableInPC{
-    display:none;
-  }
-  .logout-menu{
     display:none;
   }
   #nav-mobile{
@@ -98,7 +93,7 @@ body{
 }
 .logout-menu{
   height:50px;
-  width:25%;
+  width:15%;
   margin:0;
 }
 .nav-btns{
