@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>card-designing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/css/fpost.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!-- width=device-widthは、ページ幅をデバイスの画面幅に合わせるように設定-->
+  <!-- initial-scale=1は、ページがブラウザによって最初に読み込まれたときのズームレベル-->
+  <!-- モバイルファースト設定-->
+</head>
+<style>
+.memo>p{
+  width:80%;
+  display:inline-block;
+}
+@media screen and (min-width:0px) and (max-width:630px){
+  .card-body{
+    padding:0px;
+  }
+  .memo{
+    padding:0px;
+    width:100%;
+  }
+  .memo>p{
+    padding:0px;
+    width:100%;
+  }
+}
+</style>
+<body>
+  <div class="branks"><span></span></div>
+  <div class="container-main">
+    <div id="memo-list">
+      <div class="card">
+        <ul style="list-style:none;margin:0;">
+          <li class="float-right">
+            <a class="btn btn-secondary" href="#"><i class="fas fa-times"></i><span class="disableInMobile">メモを削除</span></a>
+          </li>
+          <li class="float-right">
+            <a class="btn btn-primary" href="#"><i class="fa fa-edit"></i><span class="disableInMobile">メモを編集</span></a>
+          </li>
+        </ul>
+        <div class="card-body" style="padding-top:0;">
+          <h5 class="card-title">@UserName</h5>
+          <button class="btn btn-primary w-100 disableInTablet disableInPC" >A</button>
+          <div class="memo memo-a" style="margin:5px 0px;">
+            <button class="btn btn-primary rounded-circle p-0 disableInMobile" style="width:40px; height:40px; font-size:20px;">A</button>
+            <p style="display:inline-block;background-color:rgba(0,0,255,0.2);padding:4px 10px;">
+              this is A<br><br><br><br><br><br>
+            </p>
+          </div>
+          <button class="btn btn-primary w-100 disableInTablet disableInPC">B</button>
+          <div class="memo memo-b" style="margin:5px 0px;">
+            <button class="btn btn-primary rounded-circle p-0 disableInMobile" style="width:40px; height:40px; font-size:20px;">B</button>
+            <p style="display:inline-block;background-color:rgba(255,0,0,0.2);padding:4px 10px;">
+              this is B<br><br><br><br><br><br>
+            </p>
+          </div>
+          <div class="tags">
+            <h6 class="card-subtitle">tags</h6>
+            <ul style="list-style:none;">
+              <li style="float:left;"><a href="#">#tag1</a>&nbsp</li>
+              <li style="float:left;"><a href="#">#tag2</a>&nbsp</li>
+              <li style="float:left;"><a href="#">#tag3</a>&nbsp</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer">Posted dd.month.20yy</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
