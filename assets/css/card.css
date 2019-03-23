@@ -1,0 +1,45 @@
+.card-body{
+ padding-top:0; 
+}
+.memo{
+  margin:5px 0px;
+}
+.memo>p{
+  padding:4px 10px;
+  width:80%;
+  display:inline-block;
+}
+.memo>button{
+  width:40px;
+  height:40px;
+  font-size:20px;
+}
+.memo-a>p{
+  background-color:rgba(0,0,255,0.2);
+}
+.memo-b>p{
+  background-color:rgba(0,255,0,0.2);
+}
+.tags>ul>li>a{
+  background-color:rgba(100,100,255,0.1);
+}
+.tags>ul>li>a:hover{
+  background-color:rgba(100,100,255,0.1);
+}
+@media screen and (min-width:0px) and (max-width:630px){
+  .card-body{
+    padding:0px;
+  }
+  .memo{
+    padding:0px;
+    width:100%;
+  }
+  .memo>p{
+    padding:10px 2px;
+    width:100%;
+  }
+  .memo-btn{
+    width:40px;
+    margin-left:3px;
+  }
+}
