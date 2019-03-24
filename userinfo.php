@@ -21,8 +21,46 @@
     <div id="memo-list" style="height:1000px;">
     </div>
     <!--以下を引用させる-->
-    <div id="user-info" class="disableInMobile disableInTablet">
-      
+    <div id="user-info" class="disableInMobile disableInTablet" style="overflow:scroll;">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">@<?php echo "UserName"?></h5>
+        </div>
+        <div class="list-group" >
+          <?php
+            for($i=1;$i<=20;$i++){
+              echo "<a class=\"list-group-item list-group-item-action\" href=\""."?search=デッキ$i"."\">デッキ$i</a>";
+            }
+          ?>
+          <!--
+          <a class="list-group-item list-group-item-action" href="#">デッキ2</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ3</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ4</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ5</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ6</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ7</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ8</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ9</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ10</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ11</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ12</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ13</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ14</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ15</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ16</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ17</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ18</a>
+          <a class="list-group-item list-group-item-action" href="#">デッキ19</a>
+          -->
+        </div>
+        <!--
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Flash list 1</li>
+          <li class="list-group-item">Flash list 2</li>
+          <li class="list-group-item">Flash list 3</li>
+        </ul>
+        -->
+      </div>
     </div>
     <!--以上を引用させる-->
   </div>

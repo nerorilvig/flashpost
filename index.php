@@ -56,6 +56,7 @@
       </ul>
     </div>
     <div class="nav-contents disableInPC">
+      <!--list-group-horizontalで水平リストグループにした方が良さそう-->
       <div class="input-group disableInPC <?php if($state!="Search"){echo "disableInMobile disableInTablet";}?>" style="float:left;margin-top:5px;margin-left:10px;width:80%;">
         <input type="text" class="form-control" placeholder="メモ・デッキ・タグ検索">
         <span class="input-group-btn">
