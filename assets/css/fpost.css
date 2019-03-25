@@ -19,6 +19,10 @@
     padding:0;
     height:100px;
   }
+  .post-btn{
+    bottom:40px;
+    right:5px;
+  }
 }
 @media screen and (min-width:630px) and (max-width:992px){
   *{
@@ -38,6 +42,10 @@
     width:100%;
     max-width:720px;
     margin:0 auto;
+  }
+  .post-btn{
+    bottom:40px; 
+    right:10px;
   }
   #memo-list{
     max-width:720px;
@@ -67,6 +75,11 @@
   }
   .branks{
     height:60px;
+  }
+  .post-btn{
+    left:50%;
+    bottom:40px;
+    margin-left:386px;
   }
   #memo-list{
     max-width:720px;
@@ -135,15 +148,18 @@ body{
 }
 .container-main{
   height:auto;
-  border:solid 1px blue;
+}
+.post-btn{
+  position:fixed;
+  bottom:20px;
+  font-size:20px;
+  padding:10px 20px;
 }
 #memo-list{
-  border:solid 1px green;
   background-color:white;
 }
 #user-info{
   width:272px;
-  border:solid 1px red;
   height:500px;
   background-color:white;
 }

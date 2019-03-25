@@ -86,14 +86,21 @@
   <div class="container-main">
     <div id="memo-list">
       <?php
-        for($num=1;$num<=100;$num++){
-          require "./card.php";
+        if($state==="UserInfo"){
+          require "./userinfo.php";
+        }else{
+          for($num=1;$num<=100;$num++){
+            require "./card.php";
+          }
         }
       ?>
     </div>
-    <div id="user-info" class="disableInMobile disableInTablet">
-      ユーザ情報領域
+    <div id="user-info" class="disableInMobile disableInTablet" style="overflow:scroll;">
+      <?php
+        require "./userinfo.php";
+      ?>
     </div>
+    <button class="btn btn-info badge-pill post-btn" style="border:solid 3px white;"><i class="fas fa-pen"></i><span class="disableInMobile">投稿</span></button> 
   </div>
 </body>
 </html>

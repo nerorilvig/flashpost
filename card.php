@@ -6,7 +6,16 @@
   $userName="UserName";
 ?>
 <div class="card" id="cardId:xxx"> <!--ここのidにはデータベース上でのカードIDを入れること-->
-  <ul style="list-style:none;">
+  <ul style="list-style:none;padding:0px;">
+    <li class="float-left">
+      <!--セレクトボックスの編集可否はphp側でuseridと照合して決定されるようにする-->
+      <!--html,javascript側でenable/disableを制御するだけでは不十分。開発者ツールで書き換えられてしまう-->
+      <!--これはメモの編集機能なども同様。idが一致しなかった場合、その旨を表示して戻すこと。-->
+      <select disabled class="custom-select" >
+        <option selected="notPublic">非公開</option>
+        <option value="Public">公開</option>
+      </select>
+    </li>
     <li class="float-right">
       <a class="btn btn-danger memo-btn" href="#"><i class="fas fa-times"></i><span class="disableInMobile">メモを削除</span></a>
     </li>
