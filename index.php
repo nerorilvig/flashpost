@@ -2,7 +2,7 @@
   //テスト用データをここに記述。DB設計は後回し
   ini_set('display_errors','OFF');//for debug (本番では削除)
   $state = $_GET['state'];
-  if(($state!="Home" && $state!="PublicList" && $state!= "Search" && $state!="UserInfo")||$state==""){
+  if(($state!="Home" && $state!="PublicList" && $state!="Deck" && $state!= "UserInfo")||$state==""){
     $state="Home";
   }
   function isSelected($state,$str){
@@ -57,7 +57,7 @@
     </div>
     <div class="nav-contents disableInPC">
       <!--list-group-horizontalで水平リストグループにした方が良さそう-->
-      <div class="input-group disableInPC <?php if($state!="Search"){echo "disableInMobile disableInTablet";}?>" style="float:left;margin-top:5px;margin-left:10px;width:80%;">
+      <div class="input-group disableInPC" style="float:left;margin-top:5px;margin-left:10px;width:80%;">
         <input type="text" class="form-control" placeholder="メモ・デッキ・タグ検索">
         <span class="input-group-btn">
           <button type="button" class="btn btn-primary" onclick="location.href='?state=Search'">
@@ -74,7 +74,10 @@
           <a href='?state=PublicList' class="btn <?php echo isSelected($state,"PublicList");?>">PublicList</a>
         </li>
         <li class="nav-btn" id="navbtn3">
-          <a href="?state=Search" class="btn <?php echo isSelected($state,"Search");?>">Search</a>
+        <!--
+          <a href="?state=Search" class="btn <?php// echo isSelected($state,"Search");?>">Search</a>
+        -->
+          <a href="?state=Deck" class="btn <?php echo isSelected($state,"Deck");?>">Deck</a>
         </li>
         <li class="nav-btn" id="navbtn4">
           <a href="?state=UserInfo" class="btn <?php echo isSelected($state,"UserInfo");?>">UserInfo</a>
@@ -86,9 +89,12 @@
   <div class="container-main">
     <div id="memo-list">
       <?php
-        if($state==="UserInfo"){
-          require "./userinfo.php";
-        }else{
+        if($state=="Deck" && !isset($_GET['decklist'])){
+          require "./decklist.php";
+        }else{ 
+          if($state=="Deck" && isset($_GET['decklist'])){
+            echo '<h3>'.$_GET['decklist'].'を表示中</h3>';
+          }
           for($num=1;$num<=100;$num++){
             require "./card.php";
           }
@@ -97,7 +103,7 @@
     </div>
     <div id="user-info" class="disableInMobile disableInTablet" style="overflow:scroll;">
       <?php
-        require "./userinfo.php";
+        require "./decklist.php";
       ?>
     </div>
     <button class="btn btn-info badge-pill post-btn" style="border:solid 3px white;"><i class="fas fa-pen"></i><span class="disableInMobile">投稿</span></button> 
