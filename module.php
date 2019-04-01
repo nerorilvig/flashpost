@@ -1,15 +1,39 @@
 
-<?php //カードを1枚表示する関数。引数$tagsは配列。
-  function displayCard($card_ID,$textA,$textB,$userName,$tags,$state){
-  $memoID_A="memoTogglerA-".$card_ID;
-  $memoID_B="memoTogglerB-".$card_ID;
+<?php //カード(メモ)のデータ格納と表示用メソッドを提供するクラス
+class Card{
+  private $card_ID;
+  private $textA;
+  private $textB;
+  private $userName;
+  private $tags;
+
+  public function __construct(int $card_ID,string $textA, string $textB, string $userName, array $tags){
+    //tagがなければtagsは空配列で渡すこと
+    $this->card_ID = $card_ID;
+    $this->textA = $textA;
+    $this->textB = $textB;
+    $this->userName = $userName;
+    $this->tags = $tags;
+  }
+
+  public function displayCard($state){
+  //$stateだけ外部から受け取る
+    $card_ID = $this->card_ID;
+    $textA = $this->textA;
+    $textB = $this->textB;
+    $userName = $this->userName;
+    $tags = $this->tags;
+    $memoID_A="memoTogglerA-".($card_ID);
+    $memoID_B="memoTogglerB-".($card_ID);
 ?>
-  <div class="card" id="cardId:xxx"> <!--ここのidにはデータベース上でのカードIDを入れること-->
+  <div class="card" id="cardId:<?php echo $card_ID ?>"> 
     <ul style="list-style:none;padding:0px;">
       <li class="float-left">
-        <!--セレクトボックスの編集可否はphp側でuseridと照合して決定されるようにする-->
-        <!--html&javascript側でenable/disableを制御するだけでは不十分。開発者ツールで書き換えられてしまう-->
-        <!--これはメモの編集機能なども同様。idが一致しなかった場合、その旨を表示して戻すこと。-->
+      <?php
+        //セレクトボックスの編集可否はphp側でuseridと照合して決定されるようにする
+        //html&javascript側でenable/disableを制御するだけでは不十分。開発者ツールで書き換えられてしまう
+        //これはメモの編集機能なども同様。idが一致しなかった場合、その旨を表示して戻すこと。
+      ?>
         <select disabled class="custom-select" >
           <option selected="notPublic">非公開</option>
           <option value="Public">公開</option>
@@ -59,5 +83,8 @@
       </div>
     </div>
   </div>
-<?php } ?>
+<?php
+  } //function:displayCardの終点
+} //class:Cardの終点
+?>
 

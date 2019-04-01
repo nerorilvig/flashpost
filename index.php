@@ -1,16 +1,23 @@
 <?php 
-  //テスト用データをここに記述。DB設計は後回し
-  ini_set('display_errors','OFF');//for debug (本番では削除)
-  $state = $_GET['state'];
+  require_once "./module.php";
+  ini_set('display_errors','OFF');//for debug (本番ではOFF)
+  $state = $_GET['state'];//URLクエリでモード切替
   if(($state!="Home" && $state!="PublicList" && $state!="Deck" && $state!= "UserInfo")||$state==""){
     $state="Home";
   }
   function isSelected($state,$str){
+    //navbarのボタンがアクティブかどうかを判定し、アクティブならクラスを変えるメソッドだが
+    //jQueryでURLクエリを読んで、addClass('active')などとしたほうがよっぽど良いと思われる。修正予定
     if($state==$str){
       return "btn-primary";
     }else{
       return "btn-outline-primary";
     }
+  }
+  //テスト用データをここに記述。DB設計は後回し
+  $cardArr=[];
+  for($i=1;$i<=100;$i++){
+    $cardArr[$i] = new Card($i,"TextA-".$i,"TextB-".$i,"UserName",["tag1","tag2","tag3"]);
   }
 ?>
 <!DOCTYPE html>
@@ -30,7 +37,7 @@
   <script src="./assets/js/addMemoCtrl.js"></script>
   <!-- width=device-widthは、ページ幅をデバイスの画面幅に合わせるように設定-->
   <!-- initial-scale=1は、ページがブラウザによって最初に読み込まれたときのズームレベル-->
-  <!-- モバイルファースト設定-->
+  <!-- モバイルファースト設定を心がける。-->
 </head>
 <body>
   <nav class="navbar fixed-top navbar-expand-lg" id="navtop" >
@@ -58,7 +65,7 @@
       </ul>
     </div>
     <div class="nav-contents disableInPC">
-      <!--list-group-horizontalで水平リストグループにした方が良さそう-->
+      <!--list-group-horizontalで水平リストグループにした方が良さそう?-->
       <div class="input-group disableInPC" style="float:left;margin-top:5px;margin-left:10px;width:80%;">
         <input type="text" class="form-control" placeholder="メモ・デッキ・タグ検索">
         <span class="input-group-btn">
@@ -76,9 +83,6 @@
           <a href='?state=PublicList' class="btn <?php echo isSelected($state,"PublicList");?>">PublicList</a>
         </li>
         <li class="nav-btn" id="navbtn3">
-        <!--
-          <a href="?state=Search" class="btn <?php// echo isSelected($state,"Search");?>">Search</a>
-        -->
           <a href="?state=Deck" class="btn <?php echo isSelected($state,"Deck");?>">Deck</a>
         </li>
         <li class="nav-btn" id="navbtn4">
@@ -97,8 +101,9 @@
           if($state=="Deck" && isset($_GET['decklist'])){
             echo '<h3>'.$_GET['decklist'].'を表示中</h3>';
           }
-          for($num=1;$num<=100;$num++){
-            require "./card.php";
+          //とりあえず試験的に容易したインスタンスのメソッド呼び出しで表示。本番ではちゃんとデータベースから取得したデータを使う。
+          for($num=100;$num>=1;$num--){
+            $cardArr[$num]->displayCard($state);
           }
         }
       ?>
