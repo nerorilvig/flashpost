@@ -114,7 +114,7 @@
     </div>
     <div id="user-info" class="disableInMobile disableInTablet" style="overflow:scroll;">
       <?php
-        if($state!="Deck"||isset($deckList)){
+        if($state!="Deck"||isset($_GET['decklist'])){
           Deck::displayDeckList("UserName",$deckArr);
         }
       ?>

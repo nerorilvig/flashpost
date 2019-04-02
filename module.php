@@ -17,7 +17,7 @@ class Card{
   }
 
   public function displayCard($state){
-  //$stateだけ外部から受け取る
+  //$stateだけクラス外から受け取る
     $card_ID = $this->card_ID;
     $textA = $this->textA;
     $textB = $this->textB;
@@ -32,7 +32,7 @@ class Card{
       <?php
         //セレクトボックスの編集可否はphp側でuseridと照合して決定されるようにする
         //html&javascript側でenable/disableを制御するだけでは不十分。開発者ツールで書き換えられてしまう
-        //これはメモの編集機能なども同様。idが一致しなかった場合、その旨を表示して戻すこと。
+        //これはメモの編集機能なども同様。useridが一致しなかった場合、不正な処理である旨を表示して戻すこと。
       ?>
         <select disabled class="custom-select" >
           <option selected="notPublic">非公開</option>
@@ -57,7 +57,7 @@ class Card{
     <h5 class="card-title">@<?php echo $userName;?></h5>
     <button class="btn btn-primary w-100 disableInTablet disableInPC mobile-toggler" data-toggle="collapse" href="#<?php echo $memoID_A;?>">Aを表示/隠す</button>
       <div class="memo memo-a">
-        <!--初期状態でのpタグのクラスがshowかcollapseかは、ユーザにドロップダウンメニューで選ばせること-->
+        <!--初期状態Aを表示するか、Ｂを表示するかは、ユーザにドロップダウンメニューで選ばせること-->
         <!--カードの表示内容や表示形式はphp側で制御する-->
         <button class="btn btn-primary rounded-circle p-0 disableInMobile" data-toggle="collapse" href="#<?php echo $memoID_A;?>">A</button>
         <p class="<?php echo "show"?>" id="<?php echo $memoID_A?>">
@@ -76,7 +76,7 @@ class Card{
         <ul style="list-style:none;">
         <?php if(!empty($tags)):?>
           <?php foreach($tags as $tag) :?>
-          <li style="float:left;"><a href="<?php echo "#"; //検索用のクエリを仕込む予定?>"><?php echo $tag?></a>&nbsp</li>
+          <li style="float:left;"><a href="<?php echo "#"; //検索用のURLクエリを仕込む予定?>"><?php echo $tag?></a>&nbsp</li>
           <?php endforeach?>
         <?php endif?>
         </ul>
@@ -102,7 +102,7 @@ class Deck{
   }
 
   public static function displayDeckList(string $userName,array $deckArr){
-    //最終的にはこのメソッド内でデータベースのアクセスをできるようにするべきか?
+    //最終的にはこのメソッド内でデータベースのアクセスをさせるべきか
 ?>
     <div class="card">
       <div class="card-body">
