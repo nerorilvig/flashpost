@@ -1,6 +1,6 @@
 <?php 
   require_once "./module.php";
-  ini_set('display_errors','OFF');//for debug (本番ではOFF)
+  ini_set('display_errors','ON');//for debug (本番ではOFF)
   $state = $_GET['state'];//URLクエリでモード切替
   if(($state!="Home" && $state!="PublicList" && $state!="Deck" && $state!= "UserInfo")||$state==""){
     $state="Home";
@@ -16,8 +16,12 @@
   }
   //テスト用データをここに記述。DB設計は後回し
   $cardArr=[];
+  $deckArr=[];
   for($i=1;$i<=100;$i++){
     $cardArr[$i] = new Card($i,"TextA-".$i,"TextB-".$i,"UserName",["tag1","tag2","tag3"]);
+  }
+  for($i=0;$i<=19;$i++){
+    $deckArr[$i] = new Deck("デッキ".($i+1),$i+1,100);
   }
 ?>
 <!DOCTYPE html>
@@ -96,7 +100,7 @@
     <div id="memo-list">
       <?php
         if($state=="Deck" && !isset($_GET['decklist'])){
-          require "./decklist.php";
+          Deck::displayDeckList("UserName",$deckArr);
         }else{ 
           if($state=="Deck" && isset($_GET['decklist'])){
             echo '<h3>'.$_GET['decklist'].'を表示中</h3>';
@@ -110,7 +114,9 @@
     </div>
     <div id="user-info" class="disableInMobile disableInTablet" style="overflow:scroll;">
       <?php
-        require "./decklist.php";
+        if($state!="Deck"||isset($deckList)){
+          Deck::displayDeckList("UserName",$deckArr);
+        }
       ?>
     </div>
     <button class="btn btn-info badge-pill post-btn" style="border:solid 3px white;"><i class="fas fa-pen"></i><span class="disableInMobile">投稿</span></button> 

@@ -80,6 +80,7 @@
     left:50%;
     bottom:40px;
     margin-left:386px;
+    z-index:2000;
   }
   #memo-list{
     max-width:720px;

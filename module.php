@@ -88,3 +88,51 @@ class Card{
 } //class:Cardの終点
 ?>
 
+<?php 
+class Deck{
+  private $deckName;
+  private $deckID;
+  private $numOfCards;
+
+
+  public function __construct(string $deckName,int $deckID, int $numOfCards){
+    $this->deckName=$deckName;
+    $this->deckID=$deckID;
+    $this->numOfCards=$numOfCards;
+  }
+
+  public static function displayDeckList(string $userName,array $deckArr){
+    //最終的にはこのメソッド内でデータベースのアクセスをできるようにするべきか?
+?>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">@<?php echo $userName?></h5>
+      </div>
+      <p>デッキ一覧</p>
+      <div class="list-group" >
+      <?php foreach($deckArr as $deck){
+        $deck->displayDeck();
+      } ?>
+      </div>
+    </div>
+<?php
+  }//function:displayDeckListの終点
+
+  public function displayDeck(){
+    $deckName=$this->deckName;
+    $deckID=$this->deckID;
+    $numOfCards=$this->numOfCards;
+?>
+    <li class="list-group-item">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-outline-primary deck-btn">
+        <input class="deckChk" type="checkbox" autocomplete="off" name="deckChk" value="deckid-<?php echo $deckID;?>">メモを追加
+      <label>
+      </div>
+      <a class="" href="?state=Deck&decklist=<?php echo $deckName;?>"><?php echo $deckName; ?></a>
+      <p class="card-text">メモの数:<?php echo $numOfCards; ?></p>
+    </li>
+<?php
+  }// function:displayDeckの終点
+}// class:Deckの終点
+?>
