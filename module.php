@@ -135,4 +135,5 @@ class Deck{
 <?php
   }// function:displayDeckの終点
 }// class:Deckの終点
+//userinfoクラスを追加予定
 ?>
