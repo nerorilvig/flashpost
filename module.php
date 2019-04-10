@@ -1,32 +1,59 @@
 
 <?php //カード(メモ)のデータ格納と表示用メソッドを提供するクラス
 class Card{
-  private $card_ID;
+  private $cardID;
   private $textA;
   private $textB;
   private $userName;
   private $tags;
 
-  public function __construct(int $card_ID,string $textA, string $textB, string $userName, array $tags){
+  public function __construct(int $cardID,string $textA, string $textB, string $userName, array $tags){
     //tagがなければtagsは空配列で渡すこと
-    $this->card_ID = $card_ID;
+    $this->cardID = $cardID;
     $this->textA = $textA;
     $this->textB = $textB;
     $this->userName = $userName;
     $this->tags = $tags;
   }
-
+  public static function displayCardList(string $state, array $cardArr){
+  ?>
+  <?php
+    //以下はデッキからのカード削除ボタン。jQueryで制御
+    if($state=="Deck" && isset($_GET['decklist'])){
+    ?>
+      <div class="rmvCard-btn" style="display:none;">
+        <button class="btn btn-warning">
+          <span class="disableInMobile">表示中の</span>デッキから<span class="disableInMobile">選択中のカードを</span>削除
+        </button>
+        <span style="float:right;"><b class="selectedCardNumRmv"></b>枚<span class="disableInMobile">のカードを</span>選択中</span>
+      </div>
+    
+    <?php
+      echo '<h3>'.$_GET['decklist'].'を表示中</h3>';
+    }else{
+    //以下デッキへのカード追加ボタン。ブラウザ上での動作はjQueryで制御。
+  ?>
+      <div class="addCard-btn" style="display:none;">
+        <button class="btn btn-primary"><span class="disableInMobile">選択したカードを</span>デッキに追加</button>
+        <span style="float:right;"><b class="selectedCardNumAdd"></b>枚<span class="disableInMobile">のカードを</span>選択中</span>
+      </div>
+  <?php 
+    }
+    foreach($cardArr as $card){
+      $card->displayCard($state);
+    }
+  }
   public function displayCard($state){
   //$stateだけクラス外から受け取る
-    $card_ID = $this->card_ID;
+    $cardID = $this->cardID;
     $textA = $this->textA;
     $textB = $this->textB;
     $userName = $this->userName;
     $tags = $this->tags;
-    $memoID_A="memoTogglerA-".($card_ID);
-    $memoID_B="memoTogglerB-".($card_ID);
+    $memoID_A="memoTogglerA-".($cardID);
+    $memoID_B="memoTogglerB-".($cardID);
 ?>
-  <div class="card" id="cardId:<?php echo $card_ID ?>"> 
+  <div class="card" id="cardId:<?php echo $cardID ?>"> 
     <ul style="list-style:none;padding:0px;">
       <li class="float-left">
       <?php
@@ -47,9 +74,24 @@ class Card{
       </li>
       <li class="float-right">
         <?php if($state=="Deck"):?>
-        <a class="btn btn-warning memo-btn" href="#"><i class="fas fa-minus"></i><span class="disableInMobile">表示中のデッキから削除</span></a>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-outline-warning deck-btn memo-btn">
+            <input class="rmvChk" type="checkbox" autocomplete="off" name="rmvFromDeck" value="cardid-<?php echo $cardID;?>">
+            <i class="fas fa-minus"></i><span class="disableInMobile">表示中のデッキから削除</span>
+          <label>
+        </div>
+        <!--
+        <a class="btn btn-warning memo-btn" href="#">
+          <i class="fas fa-minus"></i><span class="disableInMobile">表示中のデッキから削除</span>
+        </a>
+        -->
         <?php else:?>
-        <a class="btn btn-primary memo-btn" href="#"><i class="fas fa-plus"></i><span class="disableInMobile">デッキへ追加</span></a>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-outline-primary deck-btn memo-btn">
+            <input class="addChk" type="checkbox" autocomplete="off" name="addToDeck" value="cardid-<?php echo $cardID;?>">
+            <i class="fas fa-plus"></i><span class="disableInMobile">デッキへ追加</span>
+          <label>
+        </div>
         <?php endif?>
       </li>
     </ul>
@@ -76,7 +118,7 @@ class Card{
         <ul style="list-style:none;">
         <?php if(!empty($tags)):?>
           <?php foreach($tags as $tag) :?>
-          <li style="float:left;"><a href="<?php echo "#"; //検索用のURLクエリを仕込む予定?>"><?php echo $tag?></a>&nbsp</li>
+          <li style="float:left;"><a href="<?php echo "#"; //検索用のURLクエリを仕込む予定?>"><?php echo "#".$tag?></a>&nbsp</li>
           <?php endforeach?>
         <?php endif?>
         </ul>
@@ -94,7 +136,6 @@ class Deck{
   private $deckID;
   private $numOfCards;
 
-
   public function __construct(string $deckName,int $deckID, int $numOfCards){
     $this->deckName=$deckName;
     $this->deckID=$deckID;
@@ -106,7 +147,8 @@ class Deck{
 ?>
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">@<?php echo $userName?></h5>
+        <h5 class="card-title">DeckList</h5>
+        <button id="#addDeck" class="btn btn-primary">デッキを新規作成</button>
       </div>
       <p>デッキ一覧</p>
       <div class="list-group" >
@@ -125,9 +167,9 @@ class Deck{
 ?>
     <li class="list-group-item">
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-outline-primary deck-btn">
-        <input class="deckChk" type="checkbox" autocomplete="off" name="deckChk" value="deckid-<?php echo $deckID;?>">メモを追加
-      <label>
+        <label class="btn btn-outline-primary deck-btn">
+          <input class="deckChk" type="checkbox" autocomplete="off" name="deckChk" value="deckid-<?php echo $deckID;?>">メモを追加
+        <label>
       </div>
       <a class="" href="?state=Deck&decklist=<?php echo $deckName;?>"><?php echo $deckName; ?></a>
       <p class="card-text">メモの数:<?php echo $numOfCards; ?></p>
@@ -135,5 +177,91 @@ class Deck{
 <?php
   }// function:displayDeckの終点
 }// class:Deckの終点
-//userinfoクラスを追加予定
+
+class User{
+  //pdoでデッキやカードのリストを検索できるようにしたい・・・
+  private $userName;
+  private $userID;
+  private $numOfDecks;
+  private $numOfCards;
+  private $signUpDate;
+  private $configSetting;
+
+  public function __construct($userName,$userID,$numOfDecks,$numOfCards,$signUpDate){
+    $this->userName=$userName;
+    $this->userID=$userID;
+    $this->numOfDecks=$numOfDecks;
+    $this->numOfCards=$numOfCards;
+    $this->sugnUpDate=$signUpDate;
+  }
+
+  public  function displayUserInfo(){
+    $userName=$this->userName;
+    $numOfDecks=$this->numOfDecks;
+    $numOfCards=$this->numOfCards;
+    $signUpDate=date('Y年m月d日 H:i',strtotime($this->signUpDate));
 ?>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">@<?php echo $userName;?></h5>
+        <h6 class="card-subtitle"><?php echo $signUpDate;?>に利用を開始</h6>
+        <br>
+        <p class="card-text">これまで投稿したメモ<br />
+        <?php echo $numOfCards;?>枚</p>
+        <p class="card-text">デッキの数<br />
+        <?php echo $numOfDecks;?></p>
+      </div>
+    </div>
+<?php
+  }//displayUserInfoの終点
+}//UserInfoの終点
+
+class Config{ //まだ暫定版。Configの項目は決まってない。
+  private $config_1;
+  private $config_2;
+  private $config_3;
+
+  public function __construct($userID){
+    //PDOでmysqlから$userIDで検索かけてコンフィグのデータを呼び出して代入する     
+    //とりあえず、ここではテスト用のデータを入れる
+    $this->config_1=true;
+    $this->config_2=false;
+    $this->config_3=true;
+  }
+
+  public function displayConfig(){
+    //Configの表示用メソッド。以下は暫定の処理
+    $config_1=$this->config_1;
+    $config_2=$this->config_2;
+    $config_3=$this->config_3;
+?>
+  <div class="card-body">
+    <h5 class="card-title">ユーザ設定</h5>
+    <button class="btn btn-info">設定変更を反映する</button><br><br>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-outline-primary <?php if($config_1){echo "active";} ?>">
+         <input <?php if($config_1){echo "checked";}?> type="checkbox" autocomplete="off" name="config_1" value="<?php echo $config_1?>">Config_1
+      </label>
+    </div>
+    <br>
+    <br>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-outline-primary <?php if($config_2){echo "active";} ?>">
+         <input <?php if($config_2){echo "checked";}?> type="checkbox" autocomplete="off" name="config_2" value="<?php echo $config_2?>">Config_2
+      </label>
+    </div>
+    <br>
+    <br>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-outline-primary <?php if($config_3){echo "active";} ?>">
+         <input <?php if($config_3){echo "checked";}?> type="checkbox" autocomplete="off" name="config_3" value="<?php echo $config_3?>">Config_3
+      </label>
+    </div>
+    <br>
+    <br>
+  </div>
+<?php
+  }//displayConfigの終点
+}//Configの終点
+?>
+

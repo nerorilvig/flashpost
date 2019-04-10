@@ -19,19 +19,68 @@ $(function(){
   }
 
   //チェックを変えたらクッキーを保存するイベントを登録する
+  //保存先のデッキ選択
   $(".deckChk").change(function(){
-    var save_values = [];
+    var deckChkVal = [];
     
     $(".deckChk").each(function(){
-        this.checked && save_values.push(encodeURIComponent(this.value));
+      this.checked && deckChkVal.push(encodeURIComponent(this.value));
     });
 
-    $.cookie("selected_deck", save_values.join(","));
+    $.cookie("selected_deck", deckChkVal.join(","));
     console.log($.cookie("selected_deck"));
   });
-  $("#debugForDeck").click(function(){
-    $('.deckChk').each(function(){
-      console.log(this.checked);
-    })
+  //デッキに保存するメモ選択
+  $(".addChk").change(function(){
+    var addChkVal = [];
+    var isChecked = false;
+    var checkedCount = 0;
+    $(".addChk").each(function(){
+      this.checked && addChkVal.push(encodeURIComponent(this.value)); 
+      if(this.checked){
+        isChecked = true;
+        ++checkedCount;
+      }
+    });
+    $('.selectedCardNumAdd').text(checkedCount);
+    $.cookie("selected_Addcard", addChkVal.join(","));
+    console.log($.cookie("selected_Addcard"));
+    if(isChecked){
+      $('.addCard-btn').show();
+    }else{
+      $('.addCard-btn').hide();
+    }
+  });
+  $(".addCard-btn").find('button').click(function(){
+    console.log("addCardBtn clicked");
+    $(".deck-btn").each(function(){
+      $(this).removeClass('active');
+      var $chkBox=$(this).find('.addChk');
+      console.log($chkBox);
+      $chkBox.prop('checked',false);
+    });
+    console.log(checkedCount);
+  });
+  //デッキから削除するメモ選択
+  $(".rmvChk").change(function(){
+    var addChkVal = [];
+    var isChecked = false;
+    var checkedCount = 0;
+    $(".rmvChk").each(function(){
+      this.checked && addChkVal.push(encodeURIComponent(this.value)); 
+      if(this.checked){
+        isChecked = true;
+        ++checkedCount;
+      }
+    });
+
+    $.cookie("selected_Rmvcard", addChkVal.join(","));
+    console.log($.cookie("selected_Rmvcard"));
+    $('.selectedCardNumRmv').text(checkedCount);
+    if(isChecked){
+      $('.rmvCard-btn').show();
+    }else{
+      $('.rmvCard-btn').hide();
+    }
   });
 });

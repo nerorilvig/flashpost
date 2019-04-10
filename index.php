@@ -1,6 +1,7 @@
 <?php 
+  date_default_timezone_set('Asia/Tokyo');
   require_once "./module.php";
-  ini_set('display_errors','OFF');//for debug (本番ではOFF)
+  ini_set('display_errors','ON');//for debug (本番ではOFF)
   $stateList = ["Home","PublicList","Deck","UserInfo","Search"];
   //Home,PublicList,Searchはモバイル・PC共通。DeckとUserInfoはモバイルのみを想定。PCでは別枠で常に表示するので不要。
   if(!isset($_GET['state'])||!in_array($_GET['state'],$stateList,true)){
@@ -21,11 +22,13 @@
   //テスト用データをここに記述。DB設計は後回し
   $cardArr=[];
   $deckArr=[];
+  $user=new User("UserName",1,20,100,"201901010000");
+  $config=new Config(1);
   for($i=1;$i<=100;$i++){
-    $cardArr[$i] = new Card($i,"TextA-".$i,"TextB-".$i,"UserName",["tag1","tag2","tag3"]);
+    $cardArr[$i] = new Card(101-$i,"TextA-".(101-$i),"TextB-".(101-$i),"UserName",["tag1","tag2","tag3"]);
   }
-  for($i=0;$i<=19;$i++){
-    $deckArr[$i] = new Deck("デッキ".($i+1),$i+1,100);
+  for($i=1;$i<=20;$i++){
+    $deckArr[$i] = new Deck("デッキ".($i),$i,100);
   }
 ?>
 <!DOCTYPE html>
@@ -103,24 +106,32 @@
         //冒頭で用意したテストデータを表示。本番ではちゃんとデータベースから取得したデータを使う。
         if($state=="Deck" && !isset($_GET['decklist'])){
           Deck::displayDeckList("UserName",$deckArr);
+        }elseif($state=="UserInfo"){
+          $user->displayUserInfo();
+          $config->displayConfig();
         }else{ 
-          if($state=="Deck" && isset($_GET['decklist'])){
-            echo '<h3>'.$_GET['decklist'].'を表示中</h3>';
-          }
-          for($num=100;$num>=1;$num--){
-            $cardArr[$num]->displayCard($state);
-          }
+          Card::displayCardList($state,$cardArr);
         }
       ?>
     </div>
-    <div id="user-info" class="disableInMobile disableInTablet" style="overflow:scroll;">
+    <div id="deck-list" class="side-menus disableInMobile disableInTablet" style="overflow:scroll;">
       <?php
         if($state!="Deck"||isset($_GET['decklist'])){
           Deck::displayDeckList("UserName",$deckArr);
         }
       ?>
     </div>
-    <button class="btn btn-info badge-pill post-btn" style="border:solid 3px white;"><i class="fas fa-pen"></i><span class="disableInMobile">投稿</span></button> 
+    <div id="user-info" class="side-menus disableInMobile disableInTablet" style="overflow:scroll;">
+      <?php
+        if($state!="UserInfo"){
+          $user->displayUserInfo();
+          $config->displayConfig();
+        }
+      ?>
+    </div>
+    <button class="btn btn-info badge-pill post-btn" style="border:solid 3px white;">
+      <i class="fas fa-pen"></i><span class="disableInMobile">投稿</span>
+    </button> 
   </div>
 </body>
 </html>

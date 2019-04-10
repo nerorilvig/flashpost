@@ -48,7 +48,7 @@
     right:10px;
   }
   #memo-list{
-    max-width:720px;
+    max-width:700px;
   }
   #navtop{
     height:100px;
@@ -83,14 +83,7 @@
     z-index:2000;
   }
   #memo-list{
-    max-width:720px;
-  }
-  #user-info{
-    display:inline-block;
-    position:fixed;
-    top:100px;
-    left:auto;
-    margin:0 0 0 720px;
+    max-width:700px;
   }
   #navtop{
     height:50px;
@@ -156,13 +149,23 @@ body{
   font-size:20px;
   padding:10px 20px;
 }
+.side-menus{
+  height:400px;
+  width:272px;
+  background-color:white;
+  display:inline-block;
+  position:fixed;
+  left:auto;
+  margin:0 0 0 720px;
+}
 #memo-list{
   background-color:white;
 }
+#deck-list{
+  top:80px;
+}
 #user-info{
-  width:272px;
-  height:500px;
-  background-color:white;
+  top:490px;
 }
 #navtop{
   width:100%;
