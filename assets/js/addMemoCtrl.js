@@ -8,8 +8,8 @@ $(function(){
       load_values[i] = decodeURIComponent(load_values[i]);
     }
     console.log(load_values);
-    $(".deck-btn").each(function(){
-      var $chkBox=$(this).find('.deckChk');
+    $(".deck-check-label").each(function(){
+      var $chkBox=$(this).find('.deck-check-box');
       $chkBox.checked = $.inArray($chkBox.val(), load_values) != -1;
       if($chkBox.checked){
         $(this).addClass('active');
@@ -20,10 +20,10 @@ $(function(){
 
   //チェックを変えたらクッキーを保存するイベントを登録する
   //保存先のデッキ選択
-  $(".deckChk").change(function(){
+  $(".deck-check-box").change(function(){
     var deckChkVal = [];
     
-    $(".deckChk").each(function(){
+    $(".deck-check-box").each(function(){
       this.checked && deckChkVal.push(encodeURIComponent(this.value));
     });
 
@@ -64,11 +64,11 @@ $(function(){
     $(".addCard-btn").hide();
   });
   //デッキから削除するメモ選択
-  $(".rmvChk").change(function(){
+  $(".rmv-check-box").change(function(){
     var rmvChkVal = [];
     var isChecked = false;
     var checkedCount = 0;
-    $(".rmvChk").each(function(){
+    $(".rmv-check-box").each(function(){
       this.checked && rmvChkVal.push(encodeURIComponent(this.value)); 
       if(this.checked){
         isChecked = true;
@@ -76,7 +76,7 @@ $(function(){
       }
     });
 
-    $.cookie("selected_Rmvcard", addChkVal.join(","));
+    $.cookie("selected_Rmvcard", rmvChkVal.join(","));
     console.log($.cookie("selected_Rmvcard"));
     $('.selectedCardNumRmv').text(checkedCount);
     if(isChecked){

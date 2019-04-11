@@ -75,8 +75,8 @@ class Card{
       <li class="float-right">
         <?php if($state=="Deck"):?>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-outline-warning deck-btn memo-btn">
-            <input class="rmvChk" type="checkbox" autocomplete="off" name="rmvFromDeck" value="cardid-<?php echo $cardID;?>">
+          <label class="btn btn-outline-warning rmv-check-label memo-btn">
+            <input class="rmv-check-box" type="checkbox" autocomplete="off" name="rmvFromDeck" value="cardid-<?php echo $cardID;?>">
             <i class="fas fa-minus"></i><span class="disableInMobile">表示中のデッキから削除</span>
           <label>
         </div>
@@ -162,8 +162,8 @@ class Deck{
 ?>
     <li class="list-group-item">
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-outline-primary deck-btn">
-          <input class="deckChk" type="checkbox" autocomplete="off" name="deckChk" value="deckid-<?php echo $deckID;?>">メモを追加
+        <label class="btn btn-outline-primary deck-check-label">
+          <input class="deck-check-box" type="checkbox" autocomplete="off" name="deck-check-box" value="deckid-<?php echo $deckID;?>">メモを追加
         <label>
       </div>
       <a class="" href="?state=Deck&decklist=<?php echo $deckName;?>"><?php echo $deckName; ?></a>
