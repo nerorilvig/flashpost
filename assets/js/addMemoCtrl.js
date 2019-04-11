@@ -31,11 +31,11 @@ $(function(){
     console.log($.cookie("selected_deck"));
   });
   //デッキに保存するメモ選択
-  $(".addChk").change(function(){
+  $(".add-check-box").change(function(){
     var addChkVal = [];
     var isChecked = false;
     var checkedCount = 0;
-    $(".addChk").each(function(){
+    $(".add-check-box").each(function(){
       this.checked && addChkVal.push(encodeURIComponent(this.value)); 
       if(this.checked){
         isChecked = true;
@@ -51,23 +51,25 @@ $(function(){
       $('.addCard-btn').hide();
     }
   });
+  //選択中のメモを選択中のデッキに追加するボタン(設計中)
   $(".addCard-btn").find('button').click(function(){
     console.log("addCardBtn clicked");
-    $(".deck-btn").each(function(){
+    var checkedCount = 0;
+    $(".add-check-label").each(function(){
+      var $chkBox=$(this).find('.add-check-box');
+      console.log(this.checked);
       $(this).removeClass('active');
-      var $chkBox=$(this).find('.addChk');
-      console.log($chkBox);
       $chkBox.prop('checked',false);
     });
-    console.log(checkedCount);
+    $(".addCard-btn").hide();
   });
   //デッキから削除するメモ選択
   $(".rmvChk").change(function(){
-    var addChkVal = [];
+    var rmvChkVal = [];
     var isChecked = false;
     var checkedCount = 0;
     $(".rmvChk").each(function(){
-      this.checked && addChkVal.push(encodeURIComponent(this.value)); 
+      this.checked && rmvChkVal.push(encodeURIComponent(this.value)); 
       if(this.checked){
         isChecked = true;
         ++checkedCount;

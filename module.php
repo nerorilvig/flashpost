@@ -80,15 +80,10 @@ class Card{
             <i class="fas fa-minus"></i><span class="disableInMobile">表示中のデッキから削除</span>
           <label>
         </div>
-        <!--
-        <a class="btn btn-warning memo-btn" href="#">
-          <i class="fas fa-minus"></i><span class="disableInMobile">表示中のデッキから削除</span>
-        </a>
-        -->
         <?php else:?>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-outline-primary deck-btn memo-btn">
-            <input class="addChk" type="checkbox" autocomplete="off" name="addToDeck" value="cardid-<?php echo $cardID;?>">
+          <label class="btn btn-outline-primary add-check-label memo-btn">
+            <input class="add-check-box" type="checkbox" autocomplete="off" name="addToDeck" value="cardid-<?php echo $cardID;?>">
             <i class="fas fa-plus"></i><span class="disableInMobile">デッキへ追加</span>
           <label>
         </div>
