@@ -1,5 +1,6 @@
-$(function(){
+(function(){
   //ページを読み込んだら、チェックボックスにクッキーの値を反映する
+  //$('body').deckCtrl('saveCheckState',) 
   if($.cookie("selected_deck")){
     console.log($.cookie("selected_deck"));
     var load_values = $.cookie("selected_deck").split(",");
