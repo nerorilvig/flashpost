@@ -25,7 +25,7 @@ class Card{
         <button class="btn btn-warning">
           <span class="disableInMobile">表示中の</span>デッキから<span class="disableInMobile">選択中のカードを</span>削除
         </button>
-        <span style="float:right;"><b class="selectedCardNumRmv"></b>枚<span class="disableInMobile">のカードを</span>選択中</span>
+        <span style="float:right;"><b class="checkedNumRmv"></b>枚<span class="disableInMobile">のカードを</span>選択中</span>
       </div>
     
     <?php
@@ -35,7 +35,7 @@ class Card{
   ?>
       <div class="addCard-btn" style="display:none;">
         <button class="btn btn-primary"><span class="disableInMobile">選択したカードを</span>デッキに追加</button>
-        <span style="float:right;"><b class="selectedCardNumAdd"></b>枚<span class="disableInMobile">のカードを</span>選択中</span>
+        <span style="float:right;"><b class="checkedNumAdd"></b>枚<span class="disableInMobile">のカードを</span>選択中</span>
       </div>
   <?php 
     }
