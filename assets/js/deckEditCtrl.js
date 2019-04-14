@@ -32,11 +32,12 @@
       return this;
     },
     loadCheckState : function(target){
-      //クッキーの値を読み込んで、読み込み時にチェックボックスの状態を復活させる
+      var targetUcfirst = target.substring(0,1).toUpperCase() + target.substring(1);
+      //クッキーの値を読み込んで、ページ表示後にチェックボックスの状態を復活させる
       console.log("loadCheckState start. target-label="+target);
-      if($.cookie("selected_"+target)){
-        console.log($.cookie("selected_"+target));//debug
-        var load_values = $.cookie("selected_"+target).split(",");
+      if($.cookie("selected_"+targetUcfirst)){
+        console.log($.cookie("selected_"+targetUcfirst));//debug
+        var load_values = $.cookie("selected_"+targetUcfirst).split(",");
         
         for(var i = 0; i< load_values.length; ++i){
           load_values[i] = decodeURIComponent(load_values[i]);
@@ -54,7 +55,31 @@
       return this;
     },
     confirmBtn : function(target){
-      var checkedCount = 0;
+      if(target!='add'&& target!='rmv'){
+        console.log('confirmBtn Error: target is wrong. current target is \"'+target+'\"');
+        return this;
+      }
+      $("."+target+"Card-btn").find('button').click(function(){
+        console.log(target+"CardBtn clicked");
+        var checkedCount=0;
+        var checkedMemos = [];
+        var alertText1 ={add:'選択中',rmv:'表示中'}
+        var alertText2 ={add:'に追加',rmv:'から削除'}
+        $("."+target+"-check-label").each(function(){
+          var $chkBox=$(this).find("."+target+"-check-box");
+          if($chkBox.prop("checked")){
+            //ここでチェックのついたメモの配列を作成
+            //php側に渡せるようにしておく。
+            checkedCount++;
+            checkedMemos.push($chkBox.val());
+          }
+          $(this).removeClass("active");
+          $chkBox.prop("checked",false);
+        });
+        alert(checkedCount+"枚のカードを"+alertText1[target]+"のデッキ"+alertText2[target]+"しました");
+        console.log(checkedMemos);//debug
+        $("."+target+"Card-btn").hide();
+      });
     }
   };
 
