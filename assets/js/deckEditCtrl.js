@@ -13,7 +13,6 @@
         var isChecked = false;
         var checkedCount = 0;
         $("."+target+"-check-box").each(function(){
-          //このスコープ内ではthisはeachの各要素を指す・・・はず
           this.checked && targetChkVal.push(encodeURIComponent(this.value));
           if(this.checked){
             isChecked = true;
